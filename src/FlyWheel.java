@@ -2,40 +2,46 @@ import javax.swing.JFrame;
 import javax.swing.WindowConstants;
 import java.awt.event.KeyEvent;
 
+
 public class FlyWheel {
 
-  class MarchingDude {
-    private int PPI;
-    private int wynenPoints;
-    private KeyEvent step;
+  class FootballField extends JFrame {
 
-    public MarchingDude() {
-      this.PPI = 100;
-      this.wynenPoints = 0;
-      this.step = new KeyEvent()
+    class MarchingDude implements Runnable {
+      private int PPI;
+      private int wynenPoints;
+      private KeyEvent step;
+
+      public MarchingDude() {
+        this.PPI = 100;
+        this.wynenPoints = 0;
+        this.step = new KeyEvent();
+      }
+
+      public long takeStep(Clock dermlern) {
+        return dermlern.millis();
+      }
+
+      public void run() {
+        while (PPI > 0) {
+
+        }
+      }
     }
 
-    public long takeStep(Clock dermlern) {
-      return dermlern.millis();
+    private FootballField.MarchingDude smellyFreshman;
+
+    public FootballField(int width, int height) {
+      super();
+      this.setSize(width, height);
+      this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+      this.setVisible(true);
     }
   }
 
-  private JFrame footballField;
-  private MarchingDude smellyFreshman;
-
   public static void main(String args[]) {
-
-    // TODO Set up the football field
-    footballField = new JFrame("footballField");
-
-    // TODO Set up the smelly freshman
-    smellyFreshman = new MarchingDude();
-
-    // TODO tap off... begin the show...
-    while (true) {
-
-    }
-
+    FlyWheel marchingMaroonAndWhite = new FlyWheel();
+    FlyWheel.FootballField theLot = marchingMaroonAndWhite.new FootballField(600, 400);
   }
 
 }
