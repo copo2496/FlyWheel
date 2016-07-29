@@ -37,52 +37,36 @@ public class FlyWheel {
       }
     }
 
-    class SmellyFreshman extends MarchingDude implements Runnable {
-
-      class SmellyFreshmanKeyListener implements KeyListener {
-        public void keyPressed(KeyEvent e) {
-          if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-            System.out.println("Space pressed!");
-            tookStep = true;
-          }
-        }
-
-        public void keyReleased(KeyEvent e) {
-          return;
-        }
-
-        public void keyTyped(KeyEvent e) {
-          return;
-        }
-      }
-
+    class SmellyFreshman extends MarchingDude {
       private int ppiPoints;
       private int wynenPoints;
-      private boolean tookStep;
 
       public SmellyFreshman(String filePath, int x, int y) {
         super(filePath, x, y);
       }
 
       public void takeStep() {
-        if (tookStep) {
-          this.y -= 5;
-          this.tookStep = false;
-        }
-      }
-
-      @Override
-      public void run() {
-        while (true) {
-          if (tookStep) {
-            this.y -= 5;
-            this.tookStep = false;
-          }
-        }
+          this.y += 5;
       }
     }
 
-    private FootballField.SmellyFreshman smelly;
+    class FootballFieldKeyListener implements KeyListener {
+      public void keyPressed(KeyEvent e) {
+        if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+          smellyFreshman.takeStep();
+        }
+      }
+
+      public void keyReleased(KeyEvent e) {
+        return;
+      }
+
+      public void keyTyped(KeyEvent e) {
+        return;
+      }
+    }
+
+    private FootballField.SmellyFreshman smellyFreshman;
 
     public FootballField(int width, int height) {
       super();
@@ -92,18 +76,17 @@ public class FlyWheel {
     }
 
     public void tapOff() {
-      this.smelly = this.new SmellyFreshman("../imgs/spongeBob.png", 0, 0);
-      this.add(smelly);
-      FootballField.SmellyFreshman.SmellyFreshmanKeyListener keyListener = this.smelly.new SmellyFreshmanKeyListener();
+      smellyFreshman = this.new SmellyFreshman("../imgs/spongeBob.png", 0, 0);
+      FootballField.FootballFieldKeyListener keyListener = this.new FootballFieldKeyListener();
+      this.add(smellyFreshman);
       this.addKeyListener(keyListener);
-      smelly.addKeyListener(keyListener);
-      Graphics smellyGraphics = smelly.getGraphics();
-      smelly.paintComponent(smellyGraphics);
+      smellyFreshman.addKeyListener(keyListener);
+      Graphics g = smellyFreshman.getGraphics();
+      smellyFreshman.paintComponent(g);
 
       while (true) {
         this.validate();
         this.repaint();
-        smelly.takeStep();
       }
     }
   }
