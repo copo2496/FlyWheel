@@ -3,9 +3,11 @@ import javax.swing.WindowConstants;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.time.Clock;
 
 public class FootballField extends JFrame {
   private SmellyFreshman smellyFreshman;
+  private Clock dermlern;
 
   class FootballFieldKeyListener implements KeyListener {
     public void keyPressed(KeyEvent e) {
