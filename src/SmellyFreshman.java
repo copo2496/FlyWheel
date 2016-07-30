@@ -1,17 +1,25 @@
+import java.awt.image.BufferedImage;
+import javax.imageio.ImageIO;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+
 public class SmellyFreshman extends MarchingDude implements Runnable {
   private int ppiPoints;
   private int wynenPoints;
   private long takenAtTime;
+  private int stepsTaken;
 
-  public SmellyFreshman(String filePath, int x, int y) {
-    super(filePath, x, y);
-    ppiPoints = 100;
+  public SmellyFreshman(String filePath, String[] filePaths, int x, int y) {
+    super(filePath, filePaths, x, y);
+    ppiPoints = 10000;
     wynenPoints = 0;
     takenAtTime = -1;
+    stepsTaken = 0;
   }
 
   public void takeStep() {
-    this.y += 5;
+    long temp = System.currentTimeMillis();
     if (takenAtTime != -1) {
       ppiPoints -= 5;
       if (ppiPoints <= 0) {
@@ -19,7 +27,8 @@ public class SmellyFreshman extends MarchingDude implements Runnable {
         System.exit(0);
       }
     }
-    takenAtTime = System.currentTimeMillis();
+    takenAtTime = temp;
+    this.image = frames.get(stepsTaken++ % 2);
     repaint();
   }
 

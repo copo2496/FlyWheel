@@ -32,8 +32,17 @@ public class FootballField extends JFrame {
   }
 
   public void tapOff() {
-    smellyFreshman = new SmellyFreshman("../imgs/spongeBob.png", 0, 0);
     FootballField.FootballFieldKeyListener keyListener = this.new FootballFieldKeyListener();
+    this.addKeyListener(keyListener);
+
+    String smellyFreshmanFilePath = "../imgs/SnarePlayer_Static.png";
+    String[] smellyFreshmanFilePaths = new String[2];
+    smellyFreshmanFilePaths[0] = "../imgs/SnarePlayer01.png";
+    smellyFreshmanFilePaths[1] = "../imgs/SnarePlayer02.png";
+    smellyFreshman = new SmellyFreshman(smellyFreshmanFilePath, smellyFreshmanFilePaths, 0, 0);
+    this.add(smellyFreshman);
+    smellyFreshman.addkeyListener(keyListener);
+
     this.add(smellyFreshman);
     this.addKeyListener(keyListener);
     smellyFreshman.addKeyListener(keyListener);
