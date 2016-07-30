@@ -1,5 +1,6 @@
 import javax.swing.JComponent;
 import java.awt.Graphics;
+import java.awt.Dimension;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 import java.io.File;
@@ -37,6 +38,10 @@ public class MarchingDude extends JComponent implements Runnable {
       System.err.println("Reference g passed to MarchingDude.paintComponent is a null pointer!");
       System.exit(-1);
     }
+  }
+
+  public Dimension getPerferredSize() {
+    return new Dimension(250, 200);
   }
 
   @Override
