@@ -1,4 +1,4 @@
-import javax.swing.JPanel;
+import javax.swing.JComponent;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
@@ -6,7 +6,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class MarchingDude extends JPanel implements Runnable {
+public class MarchingDude extends JComponent implements Runnable {
   protected BufferedImage image;
   protected ArrayList<BufferedImage> frames;
   protected int x;
@@ -44,6 +44,7 @@ public class MarchingDude extends JPanel implements Runnable {
     int frame = 0;
     while (true) {
       image = frames.get(frame++ % 2);
+      repaint();
       try {
         Thread.sleep(500);
       } catch (InterruptedException e) {
