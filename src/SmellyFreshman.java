@@ -10,8 +10,8 @@ public class SmellyFreshman extends MarchingDude implements Runnable {
   private long takenAtTime;
   private int stepsTaken;
 
-  public SmellyFreshman(String filePath, String[] filePaths, int x, int y) {
-    super(filePath, filePaths, x, y);
+  public SmellyFreshman(String[] filePaths, int x, int y) {
+    super(filePaths, x, y);
     ppiPoints = 10000;
     wynenPoints = 0;
     takenAtTime = -1;
@@ -28,8 +28,8 @@ public class SmellyFreshman extends MarchingDude implements Runnable {
       }
     }
     takenAtTime = temp;
-    this.image = frames.get(stepsTaken++ % 2);
-    repaint();
+    this.currentFrame = frames.get(stepsTaken++ % 2);
+    myBand.repaint();
   }
 
   @Override
