@@ -17,7 +17,7 @@ public class FlyWheel extends JFrame {
     SwingUtilities.invokeLater(new Runnable() {
 
       public void run() {
-        JFrame flyWheel = new FlyWheel(1500, 2000);
+        JFrame flyWheel = new FlyWheel(1500, 2500);
         MarchingBand marchingMaroonAndWhite = new MarchingBand("../imgs/BGTestv02.png");
         flyWheel.add(marchingMaroonAndWhite);
 
@@ -25,14 +25,14 @@ public class FlyWheel extends JFrame {
         smellyFreshmanFiles[0] = "../imgs/SnarePlayer_Static.png";
         smellyFreshmanFiles[1] = "../imgs/SnarePlayer01.png";
         smellyFreshmanFiles[2] = "../imgs/SnarePlayer02.png";
-        SmellyFreshman smellyFreshman = new SmellyFreshman(smellyFreshmanFiles, 450, -5);
+        SmellyFreshman smellyFreshman = new SmellyFreshman(smellyFreshmanFiles, 500, -5);
         marchingMaroonAndWhite.add(smellyFreshman);
 
         String[] lynchFiles = new String[3];
         lynchFiles[0] = "../imgs/MrLynch02.png";
         lynchFiles[1] = "../imgs/MrLynch01.png";
         lynchFiles[2] = "../imgs/MrLynch02.png";
-        MarchingDude lynch = new MarchingDude(lynchFiles, -5, 200);
+        MarchingDude lynch = new MarchingDude(lynchFiles, -5, 50);
         marchingMaroonAndWhite.add(lynch);
 
         class KeyInput implements KeyListener {

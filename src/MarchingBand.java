@@ -1,4 +1,5 @@
 import javax.swing.JPanel;
+import javax.swing.JLabel;
 import javax.swing.JComponent;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
