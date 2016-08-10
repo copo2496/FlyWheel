@@ -28,8 +28,7 @@ public class SmellyFreshman extends MarchingDude implements Runnable {
       }
     }
     takenAtTime = temp;
-    this.currentFrame = frames.get(stepsTaken++ % 2);
-    myBand.repaint();
+    graphicsTool.paint(graphicsToolID, stepsTaken++ % 2, this.x, this.y);
   }
 
   @Override

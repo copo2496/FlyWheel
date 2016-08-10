@@ -18,6 +18,7 @@ public class FlyWheel extends JFrame {
 
       public void run() {
         JFrame flyWheel = new FlyWheel(1500, 2500);
+
         MarchingBand marchingMaroonAndWhite = new MarchingBand("../imgs/BGTestv02.png");
         flyWheel.add(marchingMaroonAndWhite);
 
@@ -49,6 +50,12 @@ public class FlyWheel extends JFrame {
         marchingMaroonAndWhite.addKeyListener(keys);
 
         flyWheel.setVisible(true);
+
+        Graphics g = marchingMaroonAndWhite.getGraphics();
+        GraphicsTool graphicsTool = new GraphicsTool(g);
+        marchingMaroonAndWhite.joinGraphics(graphicsTool);
+        smellyFreshman.joinGraphics(graphicsTool);
+        lynch.joinGraphics(graphicsTool);
 
         Thread t = new Thread(marchingMaroonAndWhite);
         t.start();
