@@ -7,12 +7,14 @@ import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.concurrent.*;
 
 public class MarchingBand extends JPanel implements Runnable {
-  private GraphicsTool graphicsTool;
-  private int graphicsToolID;
+  private CommTool commTool;
+  private int memberID;
   private BufferedImage image;
   private ArrayList<MarchingDude> marchingDudes;
+  private BlockingQueue<Integer> messages;
 
   public MarchingBand(String filePath) {
     super();
@@ -23,24 +25,25 @@ public class MarchingBand extends JPanel implements Runnable {
       System.out.println("Invalid file passed to FootballField constructor");
       System.exit(-1);
     }
+    messages = new LinkedBlockingQueue();
   }
 
   public void add(MarchingDude marchingDude) {
     marchingDudes.add(marchingDude);
   }
 
-  public void joinGraphics(GraphicsTool graphicsTool) {
-    this.graphicsTool = graphicsTool;
+  public void join(CommTool commTool) {
+    this.commTool = commTool;
     ArrayList<BufferedImage> images = new ArrayList<BufferedImage>();
     images.add(image);
-    this.graphicsToolID = this.graphicsTool.joinGraphics(images, 0, 0);
+    this.memberID = this.commTool.join(images, 0, 0, messages);
   }
 
   @Override
   public void paintComponent(Graphics g) {
     try {
       super.paintComponent(g);
-      graphicsTool.paint(graphicsToolID, 0, 0, 0);
+      commTool.paint(memberID, 0, 0, 0);
     } catch (NullPointerException e) {
       System.err.println(e);
       System.exit(-1);

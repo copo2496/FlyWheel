@@ -3,6 +3,7 @@ import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.concurrent.*;
 
 public class SmellyFreshman extends MarchingDude implements Runnable {
   private int ppiPoints;
@@ -12,7 +13,7 @@ public class SmellyFreshman extends MarchingDude implements Runnable {
 
   public SmellyFreshman(String[] filePaths, int x, int y) {
     super(filePaths, x, y);
-    ppiPoints = 10000;
+    ppiPoints = 100;
     wynenPoints = 0;
     takenAtTime = -1;
     stepsTaken = 0;
@@ -28,7 +29,7 @@ public class SmellyFreshman extends MarchingDude implements Runnable {
       }
     }
     takenAtTime = temp;
-    graphicsTool.paint(graphicsToolID, stepsTaken++ % 2, this.x, this.y);
+    commTool.paint(memberID, stepsTaken++ % 2, this.x, this.y);
   }
 
   @Override
@@ -39,6 +40,8 @@ public class SmellyFreshman extends MarchingDude implements Runnable {
         if (ppiPoints <= 0) {
           System.out.println("GAME OVER");
           System.exit(0);
+        } else if (ppiPoints <= 50) {
+          this.commTool.sendMessage(2, new Integer(1));
         }
       }
       else {
@@ -54,12 +57,14 @@ public class SmellyFreshman extends MarchingDude implements Runnable {
         }
       }
       takenAtTime = -1;
-      if (wynenPoints >= 20) {
+      if (wynenPoints >= 50) {
         ppiPoints += 5;
       }
       if (ppiPoints <= 0) {
         System.out.println("GAME OVER");
         System.exit(0);
+      } else if (ppiPoints <= 20) {
+        this.commTool.sendMessage(2, new Integer(1));
       }
       try {
         Thread.sleep(500);

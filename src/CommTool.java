@@ -1,21 +1,29 @@
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.concurrent.*;
 import java.awt.Graphics;
 
-public class GraphicsTool {
+/**
+TODO:
+the communication mechanism is a mess, make this more organiezed
+**/
+
+public class CommTool {
   private Graphics g;
   private ArrayList<ArrayList<BufferedImage>> images;
   private ArrayList<Integer> frameCount;
   private ArrayList<Integer> xs;
   private ArrayList<Integer> ys;
   private int memberCount;
+  private ArrayList<BlockingQueue<Integer>> messages;
 
-  public GraphicsTool(Graphics g) {
+  public CommTool(Graphics g) {
     this.g = g;
     images = new ArrayList<ArrayList<BufferedImage>>();
     frameCount = new ArrayList<Integer>();
     xs = new ArrayList<Integer>();
     ys = new ArrayList<Integer>();
+    messages = new ArrayList<BlockingQueue<Integer>>();
     memberCount = 0;
   }
 
@@ -31,11 +39,16 @@ public class GraphicsTool {
     }
   }
 
-  public int joinGraphics(ArrayList<BufferedImage> images, int x, int y) {
+  public void sendMessage(int member, int message) {
+    messages.get(member).add(message);
+  }
+
+  public int join(ArrayList<BufferedImage> images, int x, int y, BlockingQueue<Integer> messageQueue) {
     this.images.add(images);
     this.frameCount.add(0);
     this.xs.add(x);
     this.ys.add(y);
+    messages.add(messageQueue);
     this.memberCount++;
     return memberCount - 1;
   }
